@@ -20,6 +20,7 @@ const cartRouter = require('./routes/Carts')
 const orderRouter = require('./routes/Orders');
 const { User } = require('./model/User');
 const { isAuth, sanitizeUser, cookieExtractor } = require('./services/common');
+const path = require('path')
 
 const endpointSecret = process.env.ENDPOINT_SECRET;
 
@@ -65,7 +66,7 @@ server.use(session({
 
 }));
 
-server.use(express.static('build'));
+server.use(express.static(path.resolve(__dirname,'build')));
 
 server.use(passport.authenticate('session'));
 server.use(express.json());
