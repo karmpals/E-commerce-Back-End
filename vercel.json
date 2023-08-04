@@ -7,8 +7,70 @@
       {
         "src": "build/**",
         "use": "@vercel/static"
+      },
+      {
+        "src": "/auth/",
+        "use": "index.js"
+      },
+      {
+        "src": "/auth/(.*)",
+        "use": "index.js"
+      },
+      {
+        "src": "/products/",
+        "use": "index.js"
+      },
+      {
+        "src": "/products/(.*)",
+        "use": "index.js"
+      },
+      {
+        "src": "/categories/",
+        "use": "index.js"
+      },
+      {
+        "src": "/categories/(.*)",
+        "use": "index.js"
+      },
+      {
+        "src": "/brands/",
+        "use": "index.js"
+      },
+      {
+        "src": "/brands/(.*)",
+        "use": "index.js"
+      },
+      {
+        "src": "/users/",
+        "use": "index.js"
+      },
+      {
+        "src": "/users/(.*)",
+        "use": "index.js"
+      },
+      {
+        "src": "/cart/",
+        "use": "index.js"
+      },
+      {
+        "src": "/cart/(.*)",
+        "use": "index.js"
+      },
+      {
+        "src": "/orders/",
+        "use": "index.js"
+      },
+      {
+        "src": "/webhook/",
+        "use": "index.js"
+      },
+      {
+        "src": "/create-payment-intent/",
+        "use": "index.js"
+      },
+      {
+        "src": "/orders/(.*)",
+        "use": "index.js"
       }
-    ],
-  
-    "rewrites": [{ "source": "/(.*)", "destination": "index.js" }]
+    ]
   }
