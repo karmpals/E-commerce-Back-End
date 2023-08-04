@@ -1,7 +1,7 @@
 const { User } = require("../model/User");
 const crypto = require('crypto');
 const { sanitizeUser } = require("../services/common");
-const SECRET_KEY = 'SECRET_KEY';
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 exports.createUser = async (req, res) => {
@@ -23,8 +23,8 @@ exports.createUser = async (req, res) => {
                     if (err) {
                         res.status(400).json(err)
                     } else {
-                        const token = jwt.sign(sanitizeUser(doc), SECRET_KEY);
-                        res.cookie('jwt', token, { expires: new Date(Date.now() + 3600000), httpOnly: true }).status(201).json({id:doc.id, role:doc.role});
+                        const token = jwt.sign(sanitizeUser(doc), process.env.JWT_SECRET_KEY);
+                        res.cookie('jwt', token, { expires: new Date(Date.now() + 3600000), httpOnly: true }).status(201).json({ id: doc.id, role: doc.role });
                     }
                 })
 
@@ -36,7 +36,8 @@ exports.createUser = async (req, res) => {
 
 }
 exports.loginUser = async (req, res) => {
-    res.cookie('jwt', req.user.token, { expires: new Date(Date.now() + 3600000), httpOnly: true }).status(201).json(req.user.token);
+    const user = req.user;
+    res.cookie('jwt', user.token, { expires: new Date(Date.now() + 3600000), httpOnly: true }).status(201).json({ id: user.id, role: user.role });
 }
 exports.checkAuth = async (req, res) => {
     if (req.user) {
